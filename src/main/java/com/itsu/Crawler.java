@@ -63,12 +63,13 @@ public class Crawler {
 //                .url("https://www.qcc.com/firm/a9a529109b9ff6650f20ad54d1e193c3.html")
 //                .url("https://www.qcc.com/api/datalist/touzilist?keyNo=f058cc57ceb332c77f46fdd9dc76c772&pageIndex=2")
                 .url("https://www.qcc.com/api/datalist/touzilist?keyNo=f058cc57ceb332c77f46fdd9dc76c772&pageIndex=3")
-                .url("https://www.qcc.com/web/search?key=%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%A4%A9%E4%BD%BF%E6%8A%95%E8%B5%84%E5%BC%95%E5%AF%BC%E5%9F%BA%E9%87%91%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8")
+                .url("https://www.qcc.com/web/search?key=https://www.qcc.com/web/search?key=深圳市引导基金投资有限公司")
 //                .url("https://report.qichacha.com/ReportEngine/20211111132811173677971841_65602853/%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%BC%95%E5%AF%BC%E5%9F%BA%E9%87%91%E6%8A%95%E8%B5%84%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8.xls")
                 .addHeader("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36")
 //                .addHeader("e5022d937a426642ea10", "c9b2643b2d2e89d0d7348814b03e4ef92cb93334d188177c4919a1aa9de2a47245801b0347c729c7c4d0a9bf95194a7b8201b14f1e38a4c2d60a222464a67fac")
                 .get().build();
         call = okHttpClient.newCall(request);
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -78,11 +79,23 @@ public class Crawler {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String string = response.body().string();
-                System.out.println(string);
+                String contents = response.body().string();
+                System.out.println(contents);
+//                HtmlCleaner hc = new HtmlCleaner();
+//                TagNode tn = hc.clean(contents);
+//                String xpath = "/html/body/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/table/tr[1]/td[3]/div/a[1]";
+//                Object[] objects = new Object[0];
+//                try {
+//                    objects = tn.evaluateXPath(xpath);
+//                } catch (XPatherException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(objects);
 //                byte[] bytes = response.body().bytes();
 //                FileUtil.mkdir("/Users/suben/Desktop/crawler");
 //                Files.write(Paths.get("/Users/suben/Desktop/crawler/file.xlsx"), bytes, StandardOpenOption.CREATE);
+                String[] split = contents.split("<a target=\"_blank\" href=\"https://www.qcc.com/firm/");
+                System.err.println(split[1].substring(0, 37));
             }
         });
     }

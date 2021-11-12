@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "qcc js ",
+  "description": "企查查爬虫",
+  "version": "1.0",
+
+  "icons": {
+    "128": "crawler.png"
+  },
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "content_scripts": [{
+    "js": ["jquery.min.js", "qcc.js"],
+    "matches": ["https://www.qcc.com/*"]
+  }]
+}

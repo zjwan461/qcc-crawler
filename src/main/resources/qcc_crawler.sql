@@ -22,12 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `export_data`;
 CREATE TABLE `export_data` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '序号',
-  `root_comp` varchar(255) NOT NULL,
-  `comp_name` varchar(255) NOT NULL COMMENT '公司名称',
-  `legal_person` varchar(255) DEFAULT NULL COMMENT '法人',
-  `capital` varchar(255) DEFAULT NULL COMMENT '注册资本',
-  `level` int unsigned NOT NULL COMMENT '层级',
+  `id` int unsigned auto_increment not null comment 'id',
+  `name` varchar(255) NOT NULL comment '公司名称',
+  `href` varchar(500) NOT NULL COMMENT '企查查链接',
+  `parent` varchar(255) DEFAULT NULL COMMENT '父公司名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

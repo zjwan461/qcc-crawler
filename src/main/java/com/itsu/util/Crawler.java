@@ -1,4 +1,4 @@
-package com.itsu;
+package com.itsu.util;
 
 import cn.hutool.core.collection.ListUtil;
 import okhttp3.*;

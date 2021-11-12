@@ -1,4 +1,4 @@
-package com.itsu;
+package com.itsu.util;
 
 public class main {
     public static void main(String[] args) {

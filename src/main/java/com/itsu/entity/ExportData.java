@@ -8,6 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -22,4 +24,6 @@ public class ExportData {
     private String href;
     @TableField
     private String parent;
+    @TableField(exist = false)
+    private List<ExportData> children;
 }

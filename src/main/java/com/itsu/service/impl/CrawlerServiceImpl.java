@@ -1,25 +1,18 @@
 package com.itsu.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSONUtil;
 import com.alibaba.excel.EasyExcel;
 import com.itsu.entity.ExcelData;
 import com.itsu.entity.ExportData;
 import com.itsu.mapper.ExportDataMapper;
 import com.itsu.service.CrawlerService;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -52,27 +45,24 @@ public class CrawlerServiceImpl implements CrawlerService {
                 treeList.add(data);
             }
         }
-        //TODO create excel file
-        String filename = System.getProperty("user.dir") + File.separator + "企查查爬虫数据.xlsx";
-        EasyExcel.write(filename, ExcelData.class)
-                .sheet("数据")
-                .doWrite(getExcelData(treeList));
-
-        File file = FileUtil.newFile(filename);
-        FileUtil.writeString(JSONUtil.toJsonPrettyStr(treeList), file, Charset.defaultCharset());
+//        String filename = System.getProperty("user.dir") + File.separator + "企查查爬虫数据.xlsx";
+//        File file = FileUtil.newFile(filename);
+//        FileUtil.writeString(JSONUtil.toJsonPrettyStr(treeList), file, Charset.defaultCharset());
         response.reset();
-        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        response.setContentType("application/vnd.ms-excel");
         response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("企查查爬虫数据.xlsx", "UTF-8"));
-        try (ServletOutputStream outputStream = response.getOutputStream();
-             BufferedInputStream inputStream = FileUtil.getInputStream(file)) {
-            byte[] cache = new byte[1024];
-            int len = 0;
-            while ((len = inputStream.read(cache)) > 0) {
-                outputStream.write(cache, 0, len);
-            }
-        } catch (IOException e) {
-            throw e;
-        }
+        EasyExcel.write(response.getOutputStream(), ExcelData.class).sheet("爬虫数据").doWrite(getExcelData(treeList));
+
+//        try (ServletOutputStream outputStream = response.getOutputStream();
+//             BufferedInputStream inputStream = FileUtil.getInputStream(file)) {
+//            byte[] cache = new byte[1024];
+//            int len = 0;
+//            while ((len = inputStream.read(cache)) > 0) {
+//                outputStream.write(cache, 0, len);
+//            }
+//        } catch (IOException e) {
+//            throw e;
+//        }
     }
 
     protected Collection<ExcelData> getExcelData(List<ExportData> treeList) {

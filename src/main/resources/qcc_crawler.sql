@@ -27,6 +27,6 @@ CREATE TABLE `export_data` (
   `href` varchar(500) NOT NULL COMMENT '企查查链接',
   `parent` varchar(255) DEFAULT NULL COMMENT '父公司名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 SET FOREIGN_KEY_CHECKS = 1;

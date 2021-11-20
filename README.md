@@ -1,7 +1,7 @@
 # qcc-crawler
 
 #### 介绍
-企查查js爬虫，通过将js程序制作成chrome浏览器插件的方式植入到http://www.qcc.com网站中实现公司信息爬虫
+企查查js爬虫，通过将js程序制作成chrome浏览器插件的方式植入到 http://www.qcc.com 网站中实现公司信息爬虫
 
 #### 软件架构
 软件架构说明
